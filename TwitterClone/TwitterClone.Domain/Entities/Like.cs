@@ -1,18 +1,13 @@
-﻿namespace TwitterClone.Domain.Entities
-{
-    public class Like
-    {
-        public Guid Id { get; private set; }
-        public Guid UserId { get; private set; }
-        public Guid TweetId { get; private set; }
-        public DateTime LikedAt { get; private set; }
+﻿namespace TwitterClone.Domain.Entities;
 
-        public Like(Guid userId, Guid tweetId)
-        {
-            Id = Guid.NewGuid();
-            UserId = userId;
-            TweetId = tweetId;
-            LikedAt = DateTime.UtcNow;
-        }
+public class Like : BaseEntity
+{
+    public Like() : base(Guid.NewGuid()) { }
+
+    public Guid TweetId { get; }
+
+    public override string DescribeRecord()
+    {
+        return $"{base.DescribeRecord()}\nLike: TweetId: {TweetId}";
     }
 }

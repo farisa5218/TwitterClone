@@ -186,7 +186,7 @@ This is a course project, but feedback and suggestions are welcome!
 2. Create a feature branch: `git checkout -b feature/your-feature`
 3. Commit your changes: `git commit -m 'Add some feature'`
 4. Push to the branch: `git push origin feature/your-feature`
-5. Open a Pull Request
+5. Open a Pull Request: https://github.com/farisa5218/TwitterClone/pull/new/feature/your-feature
 
 ---
 

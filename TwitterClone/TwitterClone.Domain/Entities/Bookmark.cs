@@ -1,22 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace TwitterClone.Domain.Entities;
 
-namespace TwitterClone.Domain.Entities
+public class Bookmark : BaseEntity
 {
-    public class Bookmark
-    {
-        public Guid Id { get; private set; }
-        public Guid UserId { get; private set; }
-        public Guid TweetId { get; private set; }
-        public DateTime BookmarkedAt { get; private set; }
+    public Bookmark() : base(Guid.NewGuid()) { }
 
-        public Bookmark(Guid userId, Guid tweetId)
-        {
-            Id = Guid.NewGuid();
-            UserId = userId;
-            TweetId = tweetId;
-            BookmarkedAt = DateTime.UtcNow;
-        }
+    private Guid TweetId { get; set; }
+    private Guid UserId { get; set; }
+
+    public override string DescribeRecord()
+    {
+        return $"{base.DescribeRecord()}\nBookmark: TweetId: {TweetId}, UserId: {UserId}, CreatedAt: {CreatedAt}";
     }
 }
