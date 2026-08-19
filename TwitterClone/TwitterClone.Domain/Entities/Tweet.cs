@@ -5,7 +5,7 @@ public class Tweet(string content) : BaseEntity
 {
     public Tweet() : this(string.Empty) { }
 
-    public Guid UserId { get; }
+    public Guid UserId { get; } 
 
     public string Content { set; get; } = content;
 
