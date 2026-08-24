@@ -1,18 +1,17 @@
-﻿namespace TwitterClone.Domain.Entities
-{
-    public class Retweet
-    {
-        public Guid Id { get; private set; }
-        public Guid UserId { get; private set; }
-        public Guid TweetId { get; private set; }
-        public DateTime RetweetedAt { get; private set; }
+﻿namespace TwitterClone.Domain.Entities;
 
-        public Retweet(Guid userId, Guid tweetId)
-        {
-            Id = Guid.NewGuid();
-            UserId = userId;
-            TweetId = tweetId;
-            RetweetedAt = DateTime.UtcNow;
-        }
+public class Retweet(string content) : BaseEntity
+(Guid.NewGuid())
+{
+    public Retweet() : this(string.Empty) { }
+
+    private Guid UserId { get; set; }
+    private Guid TweetId { get; set; }
+
+    public string Content { set; get; } = content;
+
+    public override string DescribeRecord()
+    {
+        return $"{base.DescribeRecord()}\nRetweet: AuthorId: {UserId}, TweetId: {TweetId}, Content: {Content}";
     }
 }

@@ -1,16 +1,35 @@
 ﻿namespace TwitterClone.Domain.Entities;
 
-public class Tweet(string content) : BaseEntity
-(Guid.NewGuid())
+public class Tweet : BaseEntity, Ilikeable
 {
-    public Tweet() : this(string.Empty) { }
+    private Guid _userId {  get; set; }
+    private string _content { get; set; } = string.Empty;
 
-    public Guid UserId { get; }
+    public Tweet (string content) :base(Guid.NewGuid())
+    {
+        _content = content;
+    }
 
-    public string Content { set; get; } = content;
+    public static int MaxContentLength = 250;
+
+    public void AddContent(Guid userId,string content)
+    {
+        _userId = userId;
+        _content = content;
+    }
 
     public override string DescribeRecord()
     {
-        return $"{base.DescribeRecord()}\nTweet: AuthorId: {UserId}, Content: {Content}";
+        var baseRecord = base.DescribeRecord();
+        return $"{baseRecord} | UserId: {_userId} | Content: {_content}"; 
+    }
+
+    public bool CanBeLiked()
+    {
+        if(string.IsNullOrWhiteSpace(_content))
+        {
+            return false;
+        }
+        return true;
     }
 }
