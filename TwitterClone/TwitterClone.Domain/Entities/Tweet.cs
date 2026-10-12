@@ -1,35 +1,71 @@
-﻿namespace TwitterClone.Domain.Entities;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-public class Tweet : BaseEntity, Ilikeable
+namespace TwitterClone.Domain.Entities
 {
-    private Guid _userId {  get; set; }
-    private string _content { get; set; } = string.Empty;
-
-    public Tweet (string content) :base(Guid.NewGuid())
+    public class Tweet : BaseEntity, ILikeable
     {
-        _content = content;
-    }
+        private Guid _userId;
+        private string _content;
 
-    public static int MaxContentLength = 250;
+        public static int MaxContentLength = 200;
 
-    public void AddContent(Guid userId,string content)
-    {
-        _userId = userId;
-        _content = content;
-    }
 
-    public override string DescribeRecord()
-    {
-        var baseRecord = base.DescribeRecord();
-        return $"{baseRecord} | UserId: {_userId} | Content: {_content}"; 
-    }
-
-    public bool CanBeLiked()
-    {
-        if(string.IsNullOrWhiteSpace(_content))
+        public Tweet(string content) : base(Guid.NewGuid())
         {
-            return false;
+            _content = content;
         }
-        return true;
+
+        public Tweet(Guid userId, string content) : base(Guid.NewGuid())
+        {
+            _userId = userId;
+            _content = content;
+        }
+
+        public Guid UserId
+        {
+            get { return _userId; }
+            set { _userId = value; }
+        }
+
+        public string Content
+        {
+            get { return _content; }
+            set { _content = value; }
+        }
+
+        public void AddContent(string content)
+        {
+            _content = content;
+        }
+
+        public void AddContent(Guid userId, string content)
+        {
+            _userId = userId;
+            _content = content;
+        }
+
+        public override string DescribeRecord()
+        {
+            var baseRecord = base.DescribeRecord();
+            return $"{baseRecord}, UserId: {UserId}, Content: {Content}";
+        }
+
+        public bool CanBeLiked()
+        {
+            if (string.IsNullOrWhiteSpace(Content))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public void MarkAsModified()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
