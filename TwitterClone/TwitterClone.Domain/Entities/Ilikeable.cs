@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TwitterClone.Domain.Entities
 {
-    public interface Ilikeable
+    public interface ILikeable
     {
         bool CanBeLiked();
     }

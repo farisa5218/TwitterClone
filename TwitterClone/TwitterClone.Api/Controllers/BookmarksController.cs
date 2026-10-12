@@ -1,14 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace TwitterClone.Api.Controllers
 {
+
+    // api/bookmarks
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class BookmarksController : ControllerBase
     {
+
         public BookmarksController() { }
 
 
